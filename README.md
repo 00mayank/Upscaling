@@ -19,7 +19,6 @@ For the above objective we proposed the design mentioned below in fig 1, where w
     SDvideopath = 'SDvideo/641.mp4'
     SDvideoframepath = 'SDvideo/frames'
     os.makedirs(SDvideoframepath, exist_ok=True)
-
     def extract_frames(video_path, frame_path):
         video = cv2.VideoCapture(video_path)
         frame_count = 0
@@ -59,10 +58,9 @@ This model uses a prompt to perform the task. Mentioned below is the code for mo
             			    with torch.no_grad():
                 			    result = pipe(prompt=prompt, image=image)
                 			    upscaled_image = result.images[0]
-            
-                HD_frame= os.path.join(output_path,f"upscaled_{image_name}")upscaled_image.save(HD_frame)
-    		    print("Frame up-scaling completed.")
-    upscale_frames(SDvideoframepath, HDvideoframepath)
+                            HD_frame= os.path.join(output_path,f"upscaled_{image_name}")upscaled_image.save(HD_frame)
+    		                print("Frame up-scaling completed.")
+     upscale_frames(SDvideoframepath, HDvideoframepath)
 
 4.	Video Recomposing: The final step of our conversion video was to recompose the upscaled frames to a mp4 video. This was accomplished by “cv2.videoWriter” function from OpenCV.
 We have use ‘.mp4v’ codec to convert our frames to a mp4 format video. Mentioned below is the code for video recomposing:
@@ -79,7 +77,6 @@ def create_video_from_frames(frame_path, output_video, frame_rate=60):
     	for frame in frames:
         	video_frame = cv2.imread(os.path.join(frame_path, frame))
         	video_writer.write(video_frame)
-    
     	video_writer.release()
     	print("Video up-sampling completed.")
                HDvideo = 'HDvideo/1080.mp4'
